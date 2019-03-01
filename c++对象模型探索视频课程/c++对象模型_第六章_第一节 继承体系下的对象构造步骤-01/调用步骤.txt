@@ -1,0 +1,14 @@
+C cobj;
+    C::C()   //末端类
+        B::B()
+            A::A()  //根源类
+                vptr = A::vftable; //编译器插入的代码   34 9b 2f 01
+                cout << "A::A()" << endl; //我们自己的代码
+            vptr = B::vftable;   //编译器插入的代码  54 9b 2f 01            
+            cout << "B::B()" << endl;  //我们自己的代码
+        vptr = C::vftable;   //编译器插入的代码  3c 9b 2f 01
+        //....不要在这里动虚函数表指针
+        //memset(this,0,sizeof(C));
+
+        m_c = 11; //初始化列表中基本类型变量m_c的赋值时机
+        cout << "C::C()" << endl; //我们自己的代码
